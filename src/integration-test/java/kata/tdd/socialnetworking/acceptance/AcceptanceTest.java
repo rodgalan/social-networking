@@ -28,7 +28,6 @@ public class AcceptanceTest {
   }
 
   @Test
-  @Ignore
   public void should_publish_a_message() {
     String username = "Anna";
     String message = "Hello world, I'm here!";

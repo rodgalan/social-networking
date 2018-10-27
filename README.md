@@ -52,6 +52,7 @@ Following: Charlie can subscribe to Alice’s and Bob’s timelines, and view an
    - TEST: SpringBootTest for acceptance test.
    - TEST: RestAssured for simplifying testing of REST based services in acceptance test.
    - TEST: Mockito for mock collaborators
+   - TEST: Assertj for asserts.
 
 ## Running it
 Please, use gradle wrapper (gradlew/gradlew.bat) instead of your local gradle.
