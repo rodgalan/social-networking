@@ -38,6 +38,8 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-rest')
     testCompile("junit:junit:4.12")
+    integrationTestCompile('org.springframework.boot:spring-boot-starter-test')
+    integrationTestCompile('io.rest-assured:rest-assured:3.1.0')
 }
 
 //Ensure that the check task fails the build if there are failing integration tests.

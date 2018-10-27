@@ -48,7 +48,9 @@ Following: Charlie can subscribe to Alice’s and Bob’s timelines, and view an
         Endpoint for wall: GET to /user/<user name>/wall
         
 ## Frameworks
-   - Springboot (only for getting an embedded Tomcat and a simple framework for REST Controller)
+   - RUNNING: Springboot (only for getting an embedded Tomcat and a simple framework for REST Controller)
+   - TEST: SpringBootTest for acceptance test.
+   - TEST: RestAssured for simplifying testing of REST based services in acceptance test.
 
 ## Running it
 Please, use gradle wrapper (gradlew/gradlew.bat) instead of your local gradle.
