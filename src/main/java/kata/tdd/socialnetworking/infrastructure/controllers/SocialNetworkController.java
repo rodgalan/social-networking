@@ -17,7 +17,7 @@ public class SocialNetworkController {
   }
 
   @RequestMapping(value = "/user/{username}/post", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void publishMessage(@PathVariable(name = "username", required = true) String username, @RequestBody String message) {
+  public void publishMessage(@PathVariable(name = "username") String username, @RequestBody String message) {
     publishMessage.execute(username, message);
   }
 }

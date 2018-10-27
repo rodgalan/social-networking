@@ -1,6 +1,7 @@
 package kata.tdd.socialnetworking.infrastructure.controllers;
 
 import kata.tdd.socialnetworking.application.usecases.PublishMessage;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -13,10 +14,15 @@ public class SocialNetworkControllerTest {
   @Mock
   PublishMessage publishMessage;
 
+  private SocialNetworkController socialNetworkController;
+
+  @Before
+  public void setUp() throws Exception {
+    socialNetworkController = new SocialNetworkController(publishMessage);
+  }
+
   @Test
   public void should_publish_a_message() {
-
-    SocialNetworkController socialNetworkController = new SocialNetworkController(publishMessage);
     String username = "Anna";
     String message = "Hellow, I'm here!";
     socialNetworkController.publishMessage(username, message);
