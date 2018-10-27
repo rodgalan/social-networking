@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.mockito.ArgumentMatchers.eq;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SocialNetworkControllerTest {
 
@@ -27,8 +29,7 @@ public class SocialNetworkControllerTest {
     String message = "Hellow, I'm here!";
     socialNetworkController.publishMessage(username, message);
 
-    Mockito.verify(publishMessage, Mockito.times(1)).execute(username, message);
-
+    Mockito.verify(publishMessage, Mockito.times(1)).execute(eq(username), eq(message));
   }
 }
 
