@@ -46,5 +46,19 @@ Following: Charlie can subscribe to Alice’s and Bob’s timelines, and view an
         Endpoint for reading: GET to /read?username=<user name>
         Endpoint for following: POST to /user/<user name>/follow/<another name>
         Endpoint for wall: GET to /user/<user name>/wall
+        
+## Frameworks
+   - Springboot (only for getting an embedded Tomcat and a simple framework for REST Controller)
+
+## Running it
+Please, use gradle wrapper (gradlew/gradlew.bat) instead of your local gradle.
+
+  - Running unit tests: task test
+  - Running integrationTests: task integrationTest
+  - Compile + integration tests + unit tests: task build
+  - Running application: task bootrun
+
+
+
 
 
