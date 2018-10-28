@@ -40,9 +40,4 @@ public class Post {
         Objects.equals(message, post.message);
   }
 
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(username, message);
-  }
 }
