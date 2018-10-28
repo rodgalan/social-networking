@@ -55,8 +55,8 @@ public class PostAcceptanceTest extends AcceptanceTest {
   public void should_fail_when_data_is_not_valid() throws JsonProcessingException {
     String username = "Anna";
     ObjectMapper objectMapper = new ObjectMapper();
-    ObjectNode a = objectMapper.createObjectNode().put("message", " ");
-    String body = objectMapper.writeValueAsString(a);
+    ObjectNode objectNode = objectMapper.createObjectNode().put("message", " ");
+    String body = objectMapper.writeValueAsString(objectNode);
 
     given()
         .pathParam("username", username)

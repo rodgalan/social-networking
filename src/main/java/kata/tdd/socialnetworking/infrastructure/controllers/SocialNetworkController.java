@@ -1,6 +1,7 @@
 package kata.tdd.socialnetworking.infrastructure.controllers;
 
 import kata.tdd.socialnetworking.application.usecases.PublishMessage;
+import kata.tdd.socialnetworking.application.usecases.ReadUserMessages;
 import kata.tdd.socialnetworking.domain.post.Post;
 import kata.tdd.socialnetworking.domain.post.PostCreationException;
 import org.springframework.http.HttpStatus;
@@ -12,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class SocialNetworkController {
 
   private final PublishMessage publishMessage;
+  private final ReadUserMessages readUserMessages;
 
-  public SocialNetworkController(PublishMessage publishMessage) {
+  public SocialNetworkController(PublishMessage publishMessage, ReadUserMessages readUserMessages) {
     this.publishMessage = publishMessage;
+    this.readUserMessages = readUserMessages;
   }
 
   @ResponseStatus(HttpStatus.CREATED)
@@ -28,6 +33,12 @@ public class SocialNetworkController {
   public void publishMessage(@PathVariable(name = "username") String username, @RequestBody Map<String, String> body) {
     publishMessage.execute(new Post(username, body.get("message")));
   }
+
+  public List<String> getUserMessages(String username) {
+    List<Post> execute = readUserMessages.execute(username);
+    return execute.stream().map(post -> post.getMessage()).collect(Collectors.toList());
+  }
+
 
   @ExceptionHandler(PostCreationException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
