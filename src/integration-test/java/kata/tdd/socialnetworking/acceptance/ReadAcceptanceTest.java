@@ -7,7 +7,6 @@ import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-@Ignore
 public class ReadAcceptanceTest extends AcceptanceTest {
 
   @Test
@@ -20,16 +19,7 @@ public class ReadAcceptanceTest extends AcceptanceTest {
         .contentType("application/json");
   }
 
-  @Test
-  public void should_fail_when_non_informed_accept_content_type() {
-    given()
-        .param("username", "Pedro")
-        .get("/read")
-        .then()
-        .statusCode(HTTP_BAD_REQUEST)
-        .contentType("application/json");
-  }
-
+  @Ignore
   @Test
   public void should_read_a_user_messages() {
     //TODO: To be decided if validate response json here is a good idea (I think yes?)

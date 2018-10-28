@@ -7,9 +7,11 @@ import kata.tdd.socialnetworking.domain.post.PostCreationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +36,9 @@ public class SocialNetworkController {
     publishMessage.execute(new Post(username, body.get("message")));
   }
 
-  public List<String> getUserMessages(String username) {
+  @ResponseStatus(HttpStatus.OK)
+  @GetMapping(path="/read", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<String> getUserMessages(@RequestParam String username) {
     List<Post> execute = readUserMessages.execute(username);
     return execute.stream().map(post -> post.getMessage()).collect(Collectors.toList());
   }
