@@ -1,6 +1,7 @@
 package kata.tdd.socialnetworking.infrastructure.controllers;
 
 import kata.tdd.socialnetworking.application.usecases.PublishMessage;
+import kata.tdd.socialnetworking.domain.post.Post;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,6 @@ public class SocialNetworkController {
   @RequestMapping(value = "/user/{username}/post", consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   public void publishMessage(@PathVariable(name = "username") String username, @RequestBody String message) {
-    publishMessage.execute(username, message);
+    publishMessage.execute(new Post(username, message));
   }
 }

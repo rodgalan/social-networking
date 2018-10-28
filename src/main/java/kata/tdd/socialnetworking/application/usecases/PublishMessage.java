@@ -11,8 +11,7 @@ public class PublishMessage {
     this.postRepository = postRepository;
   }
 
-  public void execute(String username, String message) {
-    Post post = new Post(username, message);
+  public void execute(Post post) {
     postRepository.save(post);
   }
 }
