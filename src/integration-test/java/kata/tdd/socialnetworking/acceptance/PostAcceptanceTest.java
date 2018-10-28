@@ -3,30 +3,14 @@ package kata.tdd.socialnetworking.acceptance;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.restassured.RestAssured;
-import kata.tdd.socialnetworking.infrastructure.SocialNetworkingApplication;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static io.restassured.RestAssured.given;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_CREATED;
+import static java.net.HttpURLConnection.HTTP_UNSUPPORTED_TYPE;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = SocialNetworkingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AcceptanceTest {
-
-  @LocalServerPort
-  private int port;
-
-  @Before
-  public void setup() {
-    RestAssured.baseURI = "http://localhost";
-    RestAssured.port = port;
-  }
+public class PostAcceptanceTest extends AcceptanceTest {
 
   @Test
   public void should_publish_a_message() {
@@ -39,11 +23,11 @@ public class AcceptanceTest {
         .body(body)
         .contentType("application/json")
         .post("/user/{username}/post")
-        .then().statusCode(HttpStatus.CREATED.value());
+        .then().statusCode(HTTP_CREATED);
   }
 
   @Test
-  public void should_not_publish_a_message_when_content_type_is_not_valid() {
+  public void should_fail_when_content_type_is_not_valid() {
     String username = "Anna";
     String message = "Hello world, I'm here!";
     String body = new ObjectMapper().createObjectNode().put("message", message).toString();
@@ -52,22 +36,23 @@ public class AcceptanceTest {
         .pathParam("username", username)
         .body(body)
         .post("/user/{username}/post")
-        .then().statusCode(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value());
+        .then().statusCode(HTTP_UNSUPPORTED_TYPE);
+
   }
 
   @Test
-  public void should_not_publish_a_message_when_body_is_not_present() {
+  public void should_fail_when_body_is_not_present() {
     String username = "Anna";
 
     given()
         .pathParam("username", username)
         .contentType("application/json")
         .post("/user/{username}/post")
-        .then().statusCode(HttpStatus.BAD_REQUEST.value());
+        .then().statusCode(HTTP_BAD_REQUEST);
   }
 
   @Test
-  public void should_not_publish_a_message_when_data_is_not_valid() throws JsonProcessingException {
+  public void should_fail_when_data_is_not_valid() throws JsonProcessingException {
     String username = "Anna";
     ObjectMapper objectMapper = new ObjectMapper();
     ObjectNode a = objectMapper.createObjectNode().put("message", " ");
@@ -78,6 +63,6 @@ public class AcceptanceTest {
         .body(body)
         .contentType("application/json")
         .post("/user/{username}/post")
-        .then().statusCode(HttpStatus.BAD_REQUEST.value());
+        .then().statusCode(HTTP_BAD_REQUEST);
   }
 }
