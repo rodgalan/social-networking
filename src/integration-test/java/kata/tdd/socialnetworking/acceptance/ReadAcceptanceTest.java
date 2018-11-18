@@ -19,7 +19,6 @@ public class ReadAcceptanceTest extends AcceptanceTest {
         .contentType("application/json");
   }
 
-  @Ignore
   @Test
   public void should_read_a_user_messages() {
     //TODO: To be decided if validate response json here is a good idea (I think yes?)

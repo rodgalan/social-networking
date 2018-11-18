@@ -15,8 +15,8 @@ public class UseCasesConfiguration {
   }
 
   @Bean
-  public ReadUserMessages readUserMessages(){
-    return new ReadUserMessages();
+  public ReadUserMessages readUserMessages(PostRepository postRepository){
+    return new ReadUserMessages(postRepository);
   }
 
 }
